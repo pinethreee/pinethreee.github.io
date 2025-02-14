@@ -64,11 +64,17 @@ const config: Config = {
   themeConfig: {
     algolia: {
       appId: '7IF30EL09N',
-      apiKey: 'f5c45d6942f2b60377913c290b78dd86',
-      indexName: 'greenn-pe-crawler',
+      apiKey: '3e61706213550b96176af29587bef541',
+      indexName: 'pinethreee.github.io',
       contextualSearch: true,
       // searchPagePath: 'search',
     },
+    metadata: [
+      {
+        name: 'algolia-site-verification',
+        content: 'BA59C8B421579332',
+      }
+    ],
     navbar: {
       title: 'Pear',
       logo: {
