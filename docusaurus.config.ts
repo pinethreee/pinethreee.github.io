@@ -51,6 +51,10 @@ const config: Config = {
       } satisfies Preset.Options,
     ],
   ],
+  scripts: [
+      'https://unpkg.com/graphre@0.1.3/dist/graphre.js',
+      'https://unpkg.com/nomnoml@1.7.0/dist/nomnoml.js'
+  ],
   stylesheets: [
     {
       href: 'https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css',

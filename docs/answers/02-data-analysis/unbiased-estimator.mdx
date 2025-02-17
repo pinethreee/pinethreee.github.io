@@ -1,8 +1,9 @@
----
-tags: [점추정, 표본추출]
----
+import Ml from "../../../src/components/ml";
+import Table from "../../../src/components/Table";
+
 
 # 불편 추정량 (Unbiased Estimator)
+
 
 ## I. 모수와 가까워지려는 성질, 불편 추정량 개념
 :::tip[통계적 개념]
@@ -11,14 +12,24 @@ tags: [점추정, 표본추출]
 :::tip[수학적 개념]
 추정량 $\hat{\theta}$ 이 모수 ${\theta}$를 추정할 때, ${E[\hat\theta]=\theta}$ 가 성립하면 $\hat{\theta}$을 ${\theta}$의 불편 추정량이라고 부름
 :::
--
+
+ㅡ 추정의 공정성(Fairness)을 보장하는 중요한 성질
+
 
 ## II. 불편 추정량 설명
-<table>
-  <colgroup>
-    <col width={'300'} />
-    <col width={'700'} />
-  </colgroup>
+### 가. 추정통계의 특정값 추정, 점추정의 4가지 준거
+<Ml diagram={`
+  [점추정 4가지 준거] --> [불편
+  추정량]
+  [점추정 4가지 준거] --> [효율성
+  (=유연성)]
+  [점추정 4가지 준거] --> [일치성]
+  [점추정 4가지 준거] --> [충분성]
+`}/>
+ㅡ 점추정 4가지 준거를 통해 모집단의 특성을 파악할 수 있음.
+
+### 나. 추정통계, 불편 추정량(Unbiased Estimator) 상세 설명
+<Table width={[300, 700]}>
   <thead>
   <tr>
     <th>구분</th>
@@ -27,21 +38,33 @@ tags: [점추정, 표본추출]
   </thead>
   <tbody>
   <tr>
-    <th>hi</th>
+    <td>불편 추정량<br/>(=불편성)</td>
+    <td>하나의 모수에 여러개의 불편추정량들이 존재</td>
+  </tr>
+  <tr>
+    <td>"표본평균"은 모평균의 불편추정량</td>
     <td>
-$$
-S^{2} = \frac{1}{n - 1} \sum_{i=1}^{n} \bigl( X_i - \bar{X} \bigr)^{2}
-$$
+      $$
+      Expectation[\bar{X}] = E[\bar{X}] = \mu
+      $$
+
+      $$
+      \bar{X} = \frac{1}{n} \sum_{i = 1}^{n} X_i
+      $$
+    </td>
+  </tr>
+  <tr>
+    <td>"표본분산"은 모집단의 불편추정량</td>
+    <td>
+      $$
+      Expectation[S^{2}] = E[S^{2}] = \sigma^{2}
+      $$
+
+      $$
+      S^{2} = \frac{1}{n - 1} \sum_{i = 1}^{n} \bigl( X_i - \bar{X} \bigr)^{2}
+      $$
     </td>
   </tr>
   </tbody>
-</table>
-
-<img width={100}  alt={''}/>
-```mermaid
-stateDiagram-v2
-  점추정&nbsp;4가지&nbsp;준거 --> 불편<br>추정량
-  점추정&nbsp;4가지&nbsp;준거 --> 효율성<br>(=유연성)
-  점추정&nbsp;4가지&nbsp;준거 --> 일치성
-  점추정&nbsp;4가지&nbsp;준거 --> 충분성
-```
+</Table>
+ㅡ 불편 추정량은 모수$E[\hat{\theta}]$ 와 모수 $\theta$ 의 차이가 0이 되도록 하는 추정량
