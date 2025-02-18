@@ -1,0 +1,89 @@
+---
+tags: [B-Tree, B+Tree, B*Tree, Balanced Tree, M차 다진 트리]
+---
+
+import Table from "../../../src/components/Table";
+
+# B-Tree
+## I. 빠른 탐색을 위한, B-Tree 개념
+:::tip[개념]
+하나의 노드에 여러개의 키를 가질 수 있는 <u>M차 다진 트리</u>로 빠른 삽입,삭제,탐색이 가능한 <u>균형된(Balanced) 자료구조</u>
+:::
+ㅡ 디스크 I/O 에 최적화 및 대용량 데이터 처리에 효율
+
+## II. M차 다진 트리, B-Tree 매커니즘
+### 가. B-Tree 의 구성과 규칙 설명
+```
+M = 3 일 때,
+
+         [6]              ---> 루트 노드
+       /      \
+    [3]        [9]        ---> 내부 노드
+   /   \      /   \
+[1,2][4,5] [7,8][10,11]   ---> 리프 노드
+```
+1. Root 노드에서 Leaf 노드의 깊이는 모두 같은 레벨 (Balanced)
+2. 모든 노드의 키는 순차 정렬 상태
+2. $M = 3$ 일 경우, 키 개수는 최소 $\lceil M/2 \rceil - 1$ 에서 최대 $M - 1$개
+3. 자식 노드의 개수는 부모 노드의 키 개수 $ +1 $ 개
+
+### 나. B-Tree 예시를 통한 구현 설명
+<Table>
+  <thead>
+  <tr>
+    <th>구분</th>
+    <th>내용</th>
+    <th>특징</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>탐색</td>
+    <td>
+      1. Root 노드에서 Leaf 노드까지 순회
+      2. 키값의 조건식을 통한 전이 대상 식별
+      3. 같은 키 발견 시 종료
+    </td>
+    <td>$ O ( \log N ) $ 시간복잡도</td>
+  </tr>
+  <tr>
+    <td>삽입</td>
+    <td>
+      1. 중간 키값 중심으로 분할(Split)
+      2. Overflow 시 중간 키값 부모노드로 이동
+      3. 부모노드 Overflow 시 반복
+    </td>
+    <td>일관된 탐색 속도 보장</td>
+  </tr>
+  <tr>
+    <td>삭제</td>
+    <td>
+      1. Leaf 노드의 키 삭제는 바로 진행
+      2. Underflow 발생 시 재분배(Redistribution) 또는 병합(Merge)
+    </td>
+    <td>재분배 또는 병합 처리 발생</td>
+  </tr>
+  </tbody>
+</Table>
+ㅡ 중위 순회 비효율은 B+Tree, 삽입 비효율은 B*Tree 로 개선 가능
+
+## III. B-Tree 비효율성 극복, B+Tree 와 B*Tree 설명
+<Table width={[50, 50]}>
+  <thead>
+  <tr>
+    <th>B+Tree</th>
+    <th>B*Tree</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>Index Set 과 Sequential set 분리</td>
+    <td>Leaf 노드간 Linked List 로 연결</td>
+  </tr>
+  <tr>
+    <td>보조 연산 횟수 개선, 공간활용도 높임</td>
+    <td>키가 2/3 채워지면 분할 실행</td>
+  </tr>
+  </tbody>
+</Table>
+ㅡ 대부분의 RDB의 Index가 B+Tree 사용, 대용량 검색 엔진에서 B*Tree 사용
