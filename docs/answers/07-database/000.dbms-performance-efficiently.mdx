@@ -1,0 +1,139 @@
+---
+tags: [DBMS, ISO/IEC25010]
+---
+
+import Table from "../../../src/components/Table";
+
+
+# DBMS 성능 측정 방법
+
+## 1. 고가용성을 위한, DBMS 성능 측정 방법 개요
+:::tip[개념]
+DBMS의 성능 측정을 위해 벤치마크 및 시나리오 기반의 테스트등을 수행하여 성능 특성을 파악하는 활동
+:::
+:::tip[ISO/IEC 25010]
+품질특성을 평가를 위한 모델 ISO/IEC 25010의 실행 효율성 항목을 활용하여 "시간효율성", "자원활용성", "기억용량" 등을 측정
+:::
+
+ㅡ DBMS 성능 지표를 설정하여 도메인 분석 후 평가 수행
+
+## 2. DBMS 성능 측정을 위한 성능 지표 설명
+<Table width={[20, 20, 60]}>
+  <thead>
+  <tr>
+    <th>항목</th>
+    <th>측정지표</th>
+    <th>설명</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td rowSpan={3}>시간<br/>효율성</td>
+    <td>응답시간(초)</td>
+    <td>- Requst time + Resposne time</td>
+  </tr>
+  <tr>
+    <td>처리량(TPS)</td>
+    <td>- 시간당 Transaction 처리</td>
+  </tr>
+  <tr>
+    <td>반환시간(초)</td>
+    <td>- 시스템 Transaction 실행부터 사용자 반환 시간</td>
+  </tr>
+  <tr>
+    <td rowSpan={2}>자원<br/>활용성</td>
+    <td>CPU, Memory (%)</td>
+    <td>- 수행 시 CPU, Memory 의 사용량 모니터</td>
+  </tr>
+  <tr>
+    <td>tmpC</td>
+    <td>- 시간처리량 / 자원사용</td>
+  </tr>
+  <tr>
+    <td rowSpan={3}>기억용량</td>
+    <td>파일 I/O</td>
+    <td>- 데이터 파일 또는 로그 파일에 기록되는 용량</td>
+  </tr>
+  <tr>
+    <td>인덱스</td>
+    <td>- 구성에 필요한 데이터의 단위</td>
+  </tr>
+  <tr>
+    <td>페이지<br/>기대수명</td>
+    <td>버퍼캐시 또는 페이지 메모리의 저장 가능 용량</td>
+  </tr>
+  </tbody>
+</Table>
+ㅡ 측정 지표를 바탕으로 베치마킹, 부하, 실험적 테스트 기법으로 평가
+
+## 3. DBMS 성능 측정 방법 설명
+### 가. DBMS 성능 측정 방법의 도식화
+
+### 나. DBMS 성능 측정 방법 상세 설명
+<Table headers={['구분', '평가방법', '설명']}>
+  <tr>
+    <td rowSpan={6}>벤치<br/>마크<br/>평가</td>
+    <td>TPC-C</td>
+    <td>- OLTP 벤치마크<br/>- 트랜젝션 중심</td>
+  </tr>
+  <tr>
+    <td>TPC-H</td>
+    <td>- OLAP 벤치마크<br/>- 복잡한 SQL 쿼리</td>
+  </tr>
+  <tr>
+    <td>TPC-DS</td>
+    <td>- 데이터웨어하우스<br/>- BI</td>
+  </tr>
+  <tr>
+    <td>TPC-E</td>
+    <td>- OLTP (금융 관련 트랜젝션 중심)</td>
+  </tr>
+  <tr>
+    <td>TPC-VMS</td>
+    <td>- 가상머신에서 성능 측정<br/>- 효율성 및 오버해드 분석</td>
+  </tr>
+  <tr>
+    <td>YCSB</td>
+    <td>- NoSQL 벤치마크<br/>- 비정형 데이터 측정</td>
+  </tr>
+  <tr>
+    <td rowSpan={3}>부하<br/>Test</td>
+    <td>정적부하</td>
+    <td>- 일정한 부하를 지속적으로 주입</td>
+  </tr>
+  <tr>
+    <td>동적부하</td>
+    <td>- 사용량을 동적으로 변화시켜 주입</td>
+  </tr>
+  <tr>
+    <td>스트레스</td>
+    <td>- 시스템의 한계 지점까지 부하를 주입</td>
+  </tr>
+  <tr>
+    <td rowSpan={3}>실험적<br/>Test</td>
+    <td>샘플데이터</td>
+    <td>- 샘플 데이터를 활용한 유사 환경의 테스트</td>
+  </tr>
+  <tr>
+    <td>실제데이터</td>
+    <td>운영환경과 유사한 실제 데이터 기반 테스트</td>
+  </tr>
+  <tr>
+    <td>시뮬레이션</td>
+    <td>특정 시나리오 기반 기능 수행 테스트</td>
+  </tr>
+</Table>
+ㅡ DBMS 성능 측정은 도메인 최적화 설계 등의 고려 필요
+
+## IV. DBMS 성능 측정 시, 고려 사항 설명
+<Table width={[50, 50]}>
+  <tr>
+    <td>(1) 도메인 최적화 설계</td>
+    <td>(2) 벤더 종속성 배제</td>
+  </tr>
+  <tr>
+    <td>(3) Test 환경 구성 최적화</td>
+    <td>(4) Application 환경 구성 고려</td>
+  </tr>
+</Table>
+ㅡ TPC 벤치마크 결과가 도메인에 따라 다르게 나타나는 경우 도메인 최적화 설계 필요

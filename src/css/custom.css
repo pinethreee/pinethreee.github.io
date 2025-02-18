@@ -84,6 +84,7 @@ h2 + .theme-admonition.theme-admonition-tip + .theme-admonition.theme-admonition
 
 .pe--table {
   display: table;
+  table-layout: fixed;
   width: 100%;
 
   tr:nth-child(2n) {
